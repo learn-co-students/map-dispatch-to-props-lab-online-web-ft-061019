@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addRestaurant } from '../actions/restaurants';
+import { addRestaurant } from '/Users/dawn/map-dispatch-to-props-lab-online-web-ft-061019/src/actions/restaurants.js';
 import { connect } from 'react-redux';
 
 export class RestaurantInput extends Component {
@@ -23,7 +23,9 @@ export class RestaurantInput extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault();
-    // add missing code
+    this.props.addRestaurant({
+      ...this.state
+    })
   }
 
   render() {
@@ -49,6 +51,13 @@ export class RestaurantInput extends Component {
   }
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    addRestaurant: (restaurantInfo) => {
+      dispatch(addRestaurant(restaurantInfo))
+    }
+  };
+};
 
 //connect this component by wrapping RestaurantInput below
-export default RestaurantInput
+export default connect(null, mapDispatchToProps)(RestaurantInput)
